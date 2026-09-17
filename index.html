@@ -1,5 +1,6 @@
 <title>2026 행감 이슈 스캔</title>
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap');
 
 :root {
@@ -412,6 +413,220 @@ h1, h2, h3 {
   .budget-table { font-size: 0.72rem; }
   .budget-table th, .budget-table td { padding: 7px 8px; }
 }
+
+
+
+/* ===== Tab Navigation ===== */
+.tab-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 28px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+  padding-top: 8px;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 12px 24px;
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  bottom: -2px;
+}
+.tab-btn:hover { color: var(--text-secondary); }
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.tab-btn .tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  padding: 0 5px;
+  margin-left: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ===== Monitoring Tab ===== */
+.monitor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.monitor-header h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+.monitor-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.monitor-status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22C55E;
+}
+.monitor-status .dot.offline { background: var(--text-muted); }
+
+.monitor-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+.monitor-empty .icon { font-size: 2.5rem; margin-bottom: 12px; }
+.monitor-empty p { font-size: 0.88rem; margin: 4px 0; }
+
+/* Date list */
+.date-list { display: flex; flex-direction: column; gap: 10px; }
+.date-card {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  color: inherit;
+}
+.date-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.date-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.date-card-date {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.date-card-day {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: var(--surface-alt);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.date-card-summary {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.date-card-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.date-card-tags .tag {
+  font-size: 0.68rem;
+}
+.date-card .arrow {
+  color: var(--accent);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* Inline viewer */
+.viewer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius) var(--radius) 0 0;
+  margin-bottom: 0;
+}
+.viewer-bar .back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.viewer-bar .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+.viewer-bar .viewer-date {
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+.viewer-bar .open-link {
+  font-size: 0.78rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+.viewer-bar .open-link:hover { text-decoration: underline; }
+.viewer-content {
+  border: 1px solid var(--border-light);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 20px;
+  background: var(--surface);
+  min-height: 200px;
+}
+.viewer-content .loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Month group */
+.month-group { margin-bottom: 24px; }
+.month-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  padding-left: 2px;
+}
+
+@media (max-width: 600px) {
+  .tab-btn { padding: 10px 14px; font-size: 0.82rem; }
+  .monitor-header { flex-direction: column; align-items: flex-start; }
+  .viewer-bar { flex-direction: column; gap: 8px; align-items: flex-start; }
+}
+
 </style>
 
 <header class="page-header">
@@ -424,6 +639,13 @@ h1, h2, h3 {
   </div>
 </header>
 
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="scan">이슈 스캔</button>
+  <button class="tab-btn" data-tab="monitor">일일 모니터링 <span class="tab-badge" id="monitor-count">0</span></button>
+</nav>
+
+<!-- ===== Tab 1: 이슈 스캔 ===== -->
+<div class="tab-panel active" id="panel-scan">
 <div class="summary-bar">
   <div class="summary-card">
     <div class="label">감사 대상</div>
@@ -1332,19 +1554,72 @@ h1, h2, h3 {
 </div>
 
 </div><!-- /issues-container -->
+</div>
+
+<!-- ===== Tab 2: 일일 모니터링 ===== -->
+<div class="tab-panel" id="panel-monitor">
+
+  <div class="monitor-header">
+    <h2>일일 모니터링 리포트</h2>
+    <div class="monitor-status">
+      <span class="dot" id="monitor-dot"></span>
+      <span id="monitor-status-text">로딩 중...</span>
+    </div>
+  </div>
+
+  <!-- List view -->
+  <div id="monitor-list">
+    <div class="monitor-empty" id="monitor-empty" style="display:none;">
+      <div class="icon">📡</div>
+      <p><strong>아직 등록된 모니터링 결과가 없습니다</strong></p>
+      <p>행감 에이전시가 매일 새벽 기관별 이슈를 스캔하면<br>이곳에 일자별로 리포트가 쌓입니다.</p>
+    </div>
+    <div id="date-list-container"></div>
+  </div>
+
+  <!-- Inline viewer -->
+  <div id="monitor-viewer" style="display:none;">
+    <div class="viewer-bar">
+      <button class="back-btn" onclick="closeViewer()">← 목록으로</button>
+      <span class="viewer-date" id="viewer-date"></span>
+      <a class="open-link" id="viewer-link" href="#" target="_blank">새 창에서 보기 →</a>
+    </div>
+    <div class="viewer-content" id="viewer-content">
+      <div class="loading">불러오는 중...</div>
+    </div>
+  </div>
+
+</div>
 
 <script>
 (function() {
-  const btns = document.querySelectorAll('.filter-btn');
-  const container = document.getElementById('issues-container');
-
-  btns.forEach(btn => {
+  // ── Tab switching ──
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(btn => {
     btn.addEventListener('click', function() {
-      btns.forEach(b => b.classList.remove('active'));
+      tabBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + this.dataset.tab).classList.add('active');
+      // Load monitor data on first visit
+      if (this.dataset.tab === 'monitor' && !window._monitorLoaded) {
+        loadManifest();
+        window._monitorLoaded = true;
+      }
+    });
+  });
+
+  // ── Issue filter (Tab 1) ──
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const issueContainer = document.getElementById('issues-container');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(b => b.classList.remove('active'));
       this.classList.add('active');
       const f = this.dataset.filter;
 
-      container.querySelectorAll('.section').forEach(sec => {
+      issueContainer.querySelectorAll('.section').forEach(sec => {
         const secType = sec.dataset.type;
         const issues = sec.querySelectorAll('.issue');
 
@@ -1358,8 +1633,6 @@ h1, h2, h3 {
           if (!sec.hidden) issues.forEach(i => i.hidden = false);
           return;
         }
-        // level filter
-        const levelMap = { high: 'high', mid: 'mid', low: 'low' };
         let anyVisible = false;
         issues.forEach(i => {
           const match = i.dataset.level === f;
@@ -1370,5 +1643,131 @@ h1, h2, h3 {
       });
     });
   });
+
+  // ── Monitoring tab logic ──
+  const DAYS_KR = ['일', '월', '화', '수', '목', '금', '토'];
+
+  function loadManifest() {
+    const dot = document.getElementById('monitor-dot');
+    const statusText = document.getElementById('monitor-status-text');
+    const badge = document.getElementById('monitor-count');
+
+    fetch('manifest.json')
+      .then(r => {
+        if (!r.ok) throw new Error('not found');
+        return r.json();
+      })
+      .then(data => {
+        const reports = data.reports || [];
+        badge.textContent = reports.length;
+        dot.classList.remove('offline');
+        statusText.textContent = reports.length > 0
+          ? '최근 업데이트: ' + reports[0].date
+          : '대기 중';
+
+        if (reports.length === 0) {
+          document.getElementById('monitor-empty').style.display = '';
+          return;
+        }
+        document.getElementById('monitor-empty').style.display = 'none';
+        renderDateList(reports);
+      })
+      .catch(() => {
+        badge.textContent = '0';
+        dot.classList.add('offline');
+        statusText.textContent = '대기 중 — manifest.json 없음';
+        document.getElementById('monitor-empty').style.display = '';
+      });
+  }
+
+  function renderDateList(reports) {
+    const container = document.getElementById('date-list-container');
+    // Group by month
+    const groups = {};
+    reports.forEach(r => {
+      const ym = r.date.substring(0, 7); // YYYY-MM
+      if (!groups[ym]) groups[ym] = [];
+      groups[ym].push(r);
+    });
+
+    let html = '';
+    for (const ym of Object.keys(groups).sort().reverse()) {
+      const [y, m] = ym.split('-');
+      html += '<div class="month-group">';
+      html += '<div class="month-label">' + y + '년 ' + parseInt(m) + '월</div>';
+      html += '<div class="date-list">';
+      groups[ym].forEach(r => {
+        const d = new Date(r.date + 'T00:00:00');
+        const dayName = DAYS_KR[d.getDay()];
+        const tags = (r.tags || []).map(t =>
+          '<span class="tag tag-' + (t.type || 'dept') + '">' + t.label + '</span>'
+        ).join('');
+        html += '<div class="date-card" data-rdate="' + r.date + '" data-rfile="' + (r.file || 'daily/' + r.date + '.html') + '">';
+        html += '  <div class="date-card-top">';
+        html += '    <span class="date-card-date">' + r.date + ' (' + dayName + ')</span>';
+        html += '    <span class="arrow">→</span>';
+        html += '  </div>';
+        if (r.summary) {
+          html += '  <div class="date-card-summary">' + r.summary + '</div>';
+        }
+        if (tags) {
+          html += '  <div class="date-card-tags">' + tags + '</div>';
+        }
+        html += '</div>';
+      });
+      html += '</div></div>';
+    }
+    container.innerHTML = html;
+    // Attach click via event delegation
+    container.querySelectorAll('.date-card').forEach(card => {
+      card.addEventListener('click', function() {
+        openReport(this.dataset.rdate, this.dataset.rfile);
+      });
+    });
+  }
+
+  // ── Viewer ──
+  window.openReport = function(date, file) {
+    document.getElementById('monitor-list').style.display = 'none';
+    const viewer = document.getElementById('monitor-viewer');
+    viewer.style.display = '';
+    document.getElementById('viewer-date').textContent = date;
+    document.getElementById('viewer-link').href = file;
+    const content = document.getElementById('viewer-content');
+    content.innerHTML = '<div class="loading">불러오는 중...</div>';
+
+    fetch(file)
+      .then(r => {
+        if (!r.ok) throw new Error('not found');
+        return r.text();
+      })
+      .then(html => {
+        // Extract body content if full HTML, or use as-is
+        let bodyContent = html;
+        const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+        if (bodyMatch) bodyContent = bodyMatch[1];
+        // Remove script tags for safety
+        bodyContent = bodyContent.replace(/<script[\s\S]*?<\/script>/gi, '');
+        content.innerHTML = bodyContent;
+      })
+      .catch(() => {
+        content.innerHTML = '<div class="loading">파일을 불러올 수 없습니다. (' + file + ')</div>';
+      });
+  };
+
+  window.closeViewer = function() {
+    document.getElementById('monitor-viewer').style.display = 'none';
+    document.getElementById('monitor-list').style.display = '';
+  };
+
+  // Auto-load if hash is #monitor
+  if (location.hash === '#monitor') {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    document.querySelector('[data-tab="monitor"]').classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-monitor').classList.add('active');
+    loadManifest();
+    window._monitorLoaded = true;
+  }
 })();
 </script>
