@@ -1,0 +1,902 @@
+<title>2026 행감 이슈 스캔</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --surface-alt: #F3F2EE;
+  --text: #1A1A1A;
+  --text-secondary: #5C5C5C;
+  --text-muted: #8A8A8A;
+  --accent: #1D4ED8;
+  --accent-light: #EFF3FE;
+  --border: #E5E4E0;
+  --border-light: #EDEDEB;
+  --high: #C53030;
+  --high-bg: #FFF1F0;
+  --high-border: #FECACA;
+  --mid: #B7791F;
+  --mid-bg: #FEFCE8;
+  --mid-border: #FDE68A;
+  --low: #2D6A4F;
+  --low-bg: #F0FDF4;
+  --low-border: #BBF7D0;
+  --tag-dept: #6366F1;
+  --tag-dept-bg: #EEF2FF;
+  --tag-org: #0891B2;
+  --tag-org-bg: #ECFEFF;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+  --radius: 8px;
+  --radius-sm: 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111111;
+    --surface: #1A1A1A;
+    --surface-alt: #222222;
+    --text: #E8E8E6;
+    --text-secondary: #A8A8A6;
+    --text-muted: #6E6E6C;
+    --accent: #6B8AFF;
+    --accent-light: #1E2A4A;
+    --border: #2E2E2E;
+    --border-light: #262626;
+    --high: #F87171;
+    --high-bg: #2A1515;
+    --high-border: #5C2020;
+    --mid: #FBBF24;
+    --mid-bg: #2A2510;
+    --mid-border: #5C4A10;
+    --low: #6EE7B7;
+    --low-bg: #102A1E;
+    --low-border: #1A4030;
+    --tag-dept: #A5B4FC;
+    --tag-dept-bg: #1E1E3A;
+    --tag-org: #67E8F9;
+    --tag-org-bg: #0C2A30;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111111;
+  --surface: #1A1A1A;
+  --surface-alt: #222222;
+  --text: #E8E8E6;
+  --text-secondary: #A8A8A6;
+  --text-muted: #6E6E6C;
+  --accent: #6B8AFF;
+  --accent-light: #1E2A4A;
+  --border: #2E2E2E;
+  --border-light: #262626;
+  --high: #F87171;
+  --high-bg: #2A1515;
+  --high-border: #5C2020;
+  --mid: #FBBF24;
+  --mid-bg: #2A2510;
+  --mid-border: #5C4A10;
+  --low: #6EE7B7;
+  --low-bg: #102A1E;
+  --low-border: #1A4030;
+  --tag-dept: #A5B4FC;
+  --tag-dept-bg: #1E1E3A;
+  --tag-org: #67E8F9;
+  --tag-org-bg: #0C2A30;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans KR', 'Noto Sans KR', system-ui, sans-serif;
+  line-height: 1.65;
+  padding-inline: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h1, h2, h3 {
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  text-wrap: balance;
+  line-height: 1.3;
+}
+
+.page-header {
+  padding-block: 32px 24px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 28px;
+}
+.page-header h1 {
+  font-size: 1.65rem;
+  font-weight: 900;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+.page-header .subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.page-header .meta {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.page-header .meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Summary bar */
+.summary-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.summary-card .label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+.summary-card .value {
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+.summary-card .value.high-color { color: var(--high); }
+.summary-card .value.mid-color { color: var(--mid); }
+
+/* Filter */
+.filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.filter-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+.filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Section */
+.section {
+  margin-bottom: 36px;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+.section-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+.section-header .count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Issue row */
+.issue {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s;
+}
+.issue:hover { box-shadow: var(--shadow-md); }
+
+.issue-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.issue-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  flex: 1;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-high { background: var(--high-bg); color: var(--high); border: 1px solid var(--high-border); }
+.badge-mid { background: var(--mid-bg); color: var(--mid); border: 1px solid var(--mid-border); }
+.badge-low { background: var(--low-bg); color: var(--low); border: 1px solid var(--low-border); }
+
+.issue-body {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.issue-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.tag-dept { background: var(--tag-dept-bg); color: var(--tag-dept); }
+.tag-org { background: var(--tag-org-bg); color: var(--tag-org); }
+.issue-link {
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-decoration: none;
+  margin-left: auto;
+}
+.issue-link:hover { text-decoration: underline; }
+
+/* Cross-cutting */
+.crosscut {
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 32px;
+}
+.crosscut h3 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+.crosscut p {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 500px) {
+  .page-header h1 { font-size: 1.35rem; }
+  .summary-bar { grid-template-columns: repeat(2, 1fr); }
+  .issue-top { flex-direction: column; gap: 6px; }
+  .issue-link { margin-left: 0; }
+}
+</style>
+
+<header class="page-header">
+  <h1>2026 행정사무감사 이슈 스캔</h1>
+  <p class="subtitle">문화체육관광위원회 소관 — 집행부 7개 과 + 소관기관 11개 전수 스캔 결과</p>
+  <div class="meta">
+    <span>검색 기간: 2025.07 – 2026.09</span>
+    <span>작성: 2026.09.17</span>
+  </div>
+</header>
+
+<div class="summary-bar">
+  <div class="summary-card">
+    <div class="label">감사 대상</div>
+    <div class="value">18</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">발굴 이슈</div>
+    <div class="value">30</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">감사질의 상</div>
+    <div class="value high-color">12</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">감사질의 중</div>
+    <div class="value mid-color">11</div>
+  </div>
+</div>
+
+<div class="crosscut">
+  <h3>관통 이슈: 2026 문체국 예산 대폭 삭감 (853억 감소, 전년 대비 −12.9%)</h3>
+  <p>예술정책과 522억, 콘텐츠산업과 143억, 관광산업과 59억 감액. 경기문화재단 출연금 199억 전액 삭감. 2차 추경에서도 54개 사업·277억 원 추가 감액. 문체국 전체 비중 1.61%로 최근 5년 최저. 다수 기관에 걸쳐 사업 축소·인건비 위기·행사 취소 등 연쇄 영향 발생. 이학수·오석규·국은주·이대한·이오수 의원 등 복수 의원이 문제 제기.</p>
+</div>
+
+<div class="filter-row">
+  <button class="filter-btn active" data-filter="all">전체</button>
+  <button class="filter-btn" data-filter="high">상</button>
+  <button class="filter-btn" data-filter="mid">중</button>
+  <button class="filter-btn" data-filter="low">하</button>
+  <button class="filter-btn" data-filter="dept">집행부</button>
+  <button class="filter-btn" data-filter="org">소관기관</button>
+</div>
+
+<div id="issues-container">
+
+<!-- ===== 문화정책과 ===== -->
+<div class="section" data-type="dept">
+<div class="section-header">
+  <h2>문화정책과</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">청년예술 사업 전면 폐지 후 국비 매칭 사업으로 대체 — 정책 연속성 훼손</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">기존 청년문화예술가 지원(5억), 청년예술인 자립지원금(6억) 등 12억 원 규모 사업을 일괄 폐지하고 국비 확보를 이유로 K-아트 사업으로 대체. 안계일 의원은 "갈아끼우기식 편성"이라 비판. 경기문화재단 기존 유사 프로그램과의 중복 문제도 동시 제기.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">문화정책과</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20251210500051" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">신규사업 우선순위·중복 편성 문제 (AI콘텐츠캠퍼스 등)</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">경기콘텐츠진흥원·교육청에서 이미 운영 중인 AI·콘텐츠 교육과 중복되는 AI 콘텐츠 캠퍼스 사업 신규 편성. "기관 간 역할 혼선과 예산 낭비" 지적. 전반적으로 일몰 기준 없이 신규 사업만 늘리는 구조 비판.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">문화정책과</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20251210500051" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 예술정책과 ===== -->
+<div class="section" data-type="dept">
+<div class="section-header">
+  <h2>예술정책과</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">예술인 기회소득 2차 지급분 28.6억 감액 — 지급액 150만→75만 원 축소</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">약 1만 300명 예술인 대상 연 150만 원 지급 공고 후, 2차 추경에서 2차 지급분 28억 5,900만 원 감액. 최종 지급액 75만 원으로 반감. 이대한 의원 "지원 안내 후 예산 삭감은 예술인 신뢰 훼손". 의회 의결 전 집행부가 사업 규모를 먼저 축소한 절차적 문제도 쟁점.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">예술정책과</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260916500138" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">예술정책과 전체 522억 감액 — 가장 큰 삭감 부서</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">문체국 전체 감액 853억 중 예술정책과 단일 부서에서 522억 감액으로 60% 이상 차지. 창작지원·공연예술·예술교육 사업 전반에 걸쳐 일률적 삭감. 경기문화재단 출연금 199억 전액 삭감도 이 과 소관.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">예술정책과</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20251124500233" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 콘텐츠산업과 ===== -->
+<div class="section" data-type="dept">
+<div class="section-header">
+  <h2>콘텐츠산업과</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">경기콘텐츠진흥원 미래산업본부 임금체납 위기 — 4개월치 4.5억 미편성</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">본예산에서 인건비를 8개월치만 책정하고 나머지 4개월은 추경 반영 예정이었으나, 1·2차 추경 모두에서 누락. 약 30명 직원 9월부터 임금 미지급 위기. 도는 "기관 자체 해결" 입장. 행정 이원화(문체국+미래성장산업국) 소관 구조의 사각지대. 노조 기자회견·법적 대응 예고.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">콘텐츠산업과</span>
+    <span class="tag tag-org">경기콘텐츠진흥원</span>
+    <a class="issue-link" href="https://www.edaily.co.kr/News/Read?newsId=03876966645577824" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">콘텐츠산업과 143억 감액 — AI 콘텐츠 어워즈 등 신규사업 실효성</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">2026 대한민국 AI 콘텐츠 어워즈 신규 개최 등 이벤트성 사업과, 기존 콘텐츠 지원사업 간 예산 배분 적정성 검토 필요. 진흥원 지원사업 규모 변동과 현장 체감도 점검 대상.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">콘텐츠산업과</span>
+    <a class="issue-link" href="https://www.newspim.com/news/view/20260601000215" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 체육진흥과 ===== -->
+<div class="section" data-type="dept">
+<div class="section-header">
+  <h2>체육진흥과</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">전국체전 직전 직장운동경기부 예산 삭감 — 훈련비 부풀리기 의혹</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">제2선수촌 연구용역비 2.5억 미집행, 훈련비·학비 지원에서 약 3억 집행 잔액 발생, 우수 지도자·선수 육성금 감액. 송규근 의원 "훈련량은 안 줄었다면서 훈련비가 남는 논리 — 주먹구구식 예산 추계 자인". 10월 전국체전(제주) 5연패 도전 앞두고 선수 사기 저하 우려.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">체육진흥과</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260915500263" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">2026 경기도생활체육대축전(가평) 개최 성과 및 예산 집행 점검</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">제37회 경기도생활체육대축전 가평 개최 완료. 전국생활체육대축전 23년 연속 최다 종목 우승 도전. 임광현 의원이 추진현황 점검. 대회 규모 대비 예산 적정성, 지역경제 파급효과 검증 필요.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">체육진흥과</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260330500066" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 관광산업과 ===== -->
+<div class="section" data-type="dept">
+<div class="section-header">
+  <h2>관광산업과</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">관광예산 59억 감액 — "미래 관광 예산은 뒷걸음" 지적</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">이한국 의원 "말로만 미래 관광, 예산은 뒷걸음". 2차 추경에서 로컬콘텐츠 개발비 6억 전액 감액, 경기 로컬 이벤트 27→17회 축소. 관광공사 경영평가 전국 1위 성과와 예산 삭감 간 괴리.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">관광산업과</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20251124500296" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="low">
+  <div class="issue-top">
+    <span class="issue-title">임진각 임시주차장 사용 종료(12.31) 대비 교통관리 미비</span>
+    <span class="badge badge-low">하</span>
+  </div>
+  <div class="issue-body">이종춘 의원, 파주 임진각 임시주차장 사용 종료에 따른 대체주차장·교통관리계획 마련 당부. 관광공사 관할 사항으로 선제 대응 필요.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">관광산업과</span>
+    <span class="tag tag-org">경기관광공사</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260723500067" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 문화유산과 ===== -->
+<div class="section" data-type="dept">
+<div class="section-header">
+  <h2>문화유산과</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">문화·자연·무형유산 통합 심의체계 조례 개정 — 이행 현황 점검</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">이병숙 의원 발의 통합 심의체계 조례 마련, 최규진 의원 무형유산 보전·진흥 조례 일부개정 원안가결(2026.9). 제도 정비 후 실제 집행부 이행 여부·심의위원회 운영 실태 감사 대상.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">문화유산과</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260907500119" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="low">
+  <div class="issue-top">
+    <span class="issue-title">유네스코 세계유산위원회 부산 개최(2026) — 남한산성 활용 연계</span>
+    <span class="badge badge-low">하</span>
+  </div>
+  <div class="issue-body">제48차 유네스코 세계유산위원회 2026년 부산 개최. 남한산성세계유산센터의 이 기회 활용 실적(홍보·관광 연계·국제교류) 점검 가능. 센터 2025년 공식 출범 이후 운영 성과 전반 포함.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">문화유산과</span>
+    <span class="tag tag-org">남한산성세계유산센터</span>
+    <a class="issue-link" href="https://www.seoul.co.kr/news/life/2025/01/21/20250121500202" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 종교협력과 ===== -->
+<div class="section" data-type="dept">
+<div class="section-header">
+  <h2>종교협력과</h2>
+  <span class="count">1건</span>
+</div>
+
+<div class="issue" data-level="low">
+  <div class="issue-top">
+    <span class="issue-title">추미애 지사 3대 종단 간담회 후속 — 종교협력 정책 실행 현황</span>
+    <span class="badge badge-low">하</span>
+  </div>
+  <div class="issue-body">추미애 도지사 취임 후 첫 3대 종단(불교·개신교·천주교) 종교지도자 간담회 개최. 간담회에서 논의된 협력 과제(사회복지·문화재 보존·갈등 조정 등)의 후속 이행 점검 가능. 상대적으로 뉴스 노출 적은 부서.</div>
+  <div class="issue-footer">
+    <span class="tag tag-dept">종교협력과</span>
+    <a class="issue-link" href="https://ggnews.co.kr/121902" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 경기문화재단 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>경기문화재단</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">출연금 199억 전액 삭감 — 인건비 중심 축소운영 위기</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">2026 본예산에서 재단 출연금 199억 원 전액 삭제. 기관이 인건비 중심으로 축소될 수밖에 없는 상황. "예술·콘텐츠는 미래 성장 분야인데 단계적 조정 없이 전액 삭감" 비판. 하반기 전시·행사 대폭 축소. 국은주 의원 후속 점검 중 — 대체 재원 발굴·민간 후원 다각화 촉구.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기문화재단</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260916500097" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">예술인 상담센터 운영·예술 현장 웹진 발간 — 재단 대응 실효성</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">출연금 삭감 속에서 2026 경기예술인 상담센터 운영, 예술 현장 웹진 발간 등 대응. 축소 운영 속 남은 사업의 실효성·현장 체감도 점검. 기존 청년예술 사업 폐지 후 대체 서비스 공백 여부.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기문화재단</span>
+    <a class="issue-link" href="https://www.anewsa.com/detail.php?number=3177847" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 경기아트센터 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>경기아트센터</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">'작동하는 혁신' 추진 — G-ARTS 플랫폼·유통 확대 실적 점검</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">2026년 목표: G-ARTS 통합 플랫폼 운영, 31개 시군 공연장 공동 유통, 공연예술 어워즈 신설, AI 자막 안경 도입. 김상회 사장 "계획이 아닌 실행으로 말하는 해". 실제 추진 성과·예산 집행률 검증 필요.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기아트센터</span>
+    <a class="issue-link" href="https://www.newspim.com/news/view/20260129001141" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">찾아가는 공연·생활문화 사업 감액 — 도민 체감사업 축소</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">2차 추경에서 찾아가는 공연·생활문화 사업 감액. 이오수 의원 "도민이 생활 속에서 직접 이용하는 사업까지 일률적 축소해서는 안 된다". '거리로 나온 예술' 사업은 본격 운영 중이나 지속 가능성 불투명.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기아트센터</span>
+    <a class="issue-link" href="https://www.gninews.co.kr/news/article.html?no=856153" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 경기도체육회 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>경기도체육회</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">제37대 체육회장 선거 추진 — 거버넌스 투명성</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">제21차 이사회에서 제37대 회장 선거 추진 보고. 선거 절차 공정성·후보 자격 심사·회원종목단체 투표 관리 등 거버넌스 이슈 감사 가능. 이원성 현 회장 체제 운영 실적 포함.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기도체육회</span>
+    <a class="issue-link" href="https://www.newscj.com/news/articleView.html?idxno=3433361" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">전국체전 5연패·아시안게임 출전 지원 — 선수 지원 체계 적정성</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">제107회 전국체전(제주) 2,430명 최대 규모 출전, 종합우승 5연패 도전. 아이치-나고야 아시안게임 출전 동시 준비. 대규모 선수단 운영 예산·훈련 지원·선수 복지 체계 점검 필요.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기도체육회</span>
+    <a class="issue-link" href="https://www.asiatoday.co.kr/kn/view.php?key=20260814010004878" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 경기도장애인체육회 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>경기도장애인체육회</h2>
+  <span class="count">1건</span>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">전국장애인체전 6연패 도전 — 예산 확보·선수 지원 현황</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">"5연패의 힘은 예산에서" — 2026 준비 본격 시동. 가맹단체 회장단 워크숍에서 6연패 결의. 의회 문체위 현안 점검 대상. 장애인 선수 처우·훈련 시설·이동 지원 등 세부 예산 집행 적정성 점검 필요.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기도장애인체육회</span>
+    <a class="issue-link" href="https://www.kyeonggi.com/article/20251230580414" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 전국체전추진단 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>전국체전추진단</h2>
+  <span class="count">1건</span>
+</div>
+
+<div class="issue" data-level="low">
+  <div class="issue-top">
+    <span class="issue-title">전국생활체육대축전 경기도 개최 — 추진단 역할 및 성과</span>
+    <span class="badge badge-low">하</span>
+  </div>
+  <div class="issue-body">2026 전국생활체육대축전 성공 개최 여부, 23년 연속 최다 종목 우승 도전 결과. 추진단의 대회 준비·운영·예산 집행 전반 점검. 제주 전국체전(10월)과 동시 준비에 따른 업무 분산 이슈.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">전국체전추진단</span>
+    <a class="issue-link" href="https://www.newscj.com/news/articleView.html?idxno=3426882" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 수원월드컵경기장관리재단 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>수원월드컵경기장관리재단</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">경영평가 마등급 — 22개 산하기관 최하위, 5년 연속 당기순손실</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">전년 81.69→72.47점으로 9.22점 하락. 전 평가영역 동반 하락 유일 기관. 중장기 전략 "전년도 동일 반복", 신규 수익사업 발굴 0건, 2024년 약 45억 적자. 직무·직급별 역량기준 부재, 단체협약 미체결, 임원-직원 연봉격차 문제. 이학수 의원 "전면 쇄신 필요".</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">수원월드컵경기장관리재단</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20251113500320" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">업무추진비 부적정 집행 기관경고 — 계약·회계·평가위원회 미흡</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">2021~2025년 업무 전반 감사 결과, 업무추진비 부적정 집행으로 기관경고. 계약·회계 기본 분야 미흡, 제안서 평가위원회 운영 부실 확인. 이종춘 의원 조직 혁신·내부통제·책임경영 확립 요구.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">수원월드컵경기장관리재단</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260723500067" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 경기관광공사 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>경기관광공사</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="low">
+  <div class="issue-top">
+    <span class="issue-title">행안부 경영평가 전국 관광공사 1위 — 성과와 예산 삭감 간 괴리</span>
+    <span class="badge badge-low">하</span>
+  </div>
+  <div class="issue-body">전년 5위에서 전국 7개 광역 관광공사 중 종합 1위 달성. 외국인 17.6만 명 유치, 경기컬쳐패스 17만 회원, AI 챗봇 하이GT 운영. 문체부 장관상 수상. 그러나 로컬콘텐츠 개발비 6억 전액 감액 등 예산 축소 속 성과 지속 가능성 검증.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기관광공사</span>
+    <a class="issue-link" href="https://m.news.nate.com/view/20260807n25575" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="low">
+  <div class="issue-top">
+    <span class="issue-title">2026 비전 발표·로컬여행 파트너스 밋업데이 — 중장기 전략 실행력</span>
+    <span class="badge badge-low">하</span>
+  </div>
+  <div class="issue-body">경기관광 발전 2026 비전 발표, 로컬여행 파트너스 밋업데이 성황리 개최. 비전 대비 실제 사업 추진 현황, 민관협력 모델 실효성 점검 가능.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기관광공사</span>
+    <a class="issue-link" href="https://www.ilyoseoul.co.kr/news/articleView.html?idxno=463907" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 경기콘텐츠진흥원 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>경기콘텐츠진흥원</h2>
+  <span class="count">1건</span>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">2026 지원사업 규모 변동·행정 이원화 구조 문제</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">임금체납 위기의 근본 원인인 문체국+미래성장산업국 이원 소관 구조. 2026년 지원사업 안내 공개(1월)했으나 실제 집행 가능 예산과 괴리. 진흥원 전체 경영 안정성·조직 운영 점검 필요. (임금체납 건은 콘텐츠산업과에서 중복 기술)</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">경기콘텐츠진흥원</span>
+    <a class="issue-link" href="https://www.gcon.or.kr/gcon/main/contents.do?menuNo=200008" target="_blank">진흥원 지원사업 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 한국도자재단 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>한국도자재단</h2>
+  <span class="count">1건</span>
+</div>
+
+<div class="issue" data-level="mid">
+  <div class="issue-top">
+    <span class="issue-title">출연기관 예산 삭감 속 사업 운영·문화취약지역 교육 실적</span>
+    <span class="badge badge-mid">중</span>
+  </div>
+  <div class="issue-body">국은주 의원이 한국도자재단 포함 출연기관 하반기 예산 감액 점검. 경기도 20개 시군 문화취약지역 도자·공예 문화교육 운영 중. 도자문화 투어·체험형 관광콘텐츠 개발 등 사업 실효성 점검. 예산 삭감 후 인력·조직 활용 대체사업 발굴 현황 확인.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">한국도자재단</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260916500097" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== DMZ국제다큐멘터리영화제 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>DMZ국제다큐멘터리영화제</h2>
+  <span class="count">2건</span>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">예산 31→24.4억 감액 — 18년 명맥 끊길 위기</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">2차 추경에서 6.5억 감액(약 21%). 비극장 상영 행사·다큐로드·다큐콘서트 취소, 초청 감독 축소, 시상식 상금 축소. 고양시 2024년부터 지원 중단 상태. 2027년 초긴축 기조 예정으로 내년 지원 전망 불투명. 이대한 의원 "의회 의결 전 사업 축소 — 9.16 폐막, 9.18 본회의인데 이미 감액 반영".</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">DMZ다큐멘터리영화제</span>
+    <a class="issue-link" href="https://www.kyeongin.com/article/1770408" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+
+<div class="issue" data-level="high">
+  <div class="issue-top">
+    <span class="issue-title">의회 의결 전 감액 기정사실화 — 절차적 정당성 문제</span>
+    <span class="badge badge-high">상</span>
+  </div>
+  <div class="issue-body">영화제 폐막(9.16)이 본회의 의결(9.18)보다 앞서면서, 확정 전 감액안을 확정예산처럼 적용한 사실 확인. 이대한 의원 "의회 심사 당시 이미 되돌리기 어렵게 진행". 집행부의 예산 운용 절차에 대한 원칙적 문제 제기. 이 구조가 DMZ영화제뿐 아니라 다른 사업에도 적용되었을 가능성.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">DMZ다큐멘터리영화제</span>
+    <a class="issue-link" href="https://go.seoul.co.kr/news/newsView.php?id=20260916500138" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== 남한산성세계유산센터 ===== -->
+<div class="section" data-type="org">
+<div class="section-header">
+  <h2>남한산성세계유산센터</h2>
+  <span class="count">1건</span>
+</div>
+
+<div class="issue" data-level="low">
+  <div class="issue-top">
+    <span class="issue-title">공식 출범 이후 운영 성과 — 유네스코 위원회 부산 개최 연계</span>
+    <span class="badge badge-low">하</span>
+  </div>
+  <div class="issue-body">2025년 공식 출범 이후 센터 운영 전반(인력·예산·방문자 수·교육프로그램). 제48차 유네스코 세계유산위원회 부산 개최(2026)와 연계한 남한산성 홍보·국제교류 활동 실적. 세계유산 보존·관리 실태 점검.</div>
+  <div class="issue-footer">
+    <span class="tag tag-org">남한산성세계유산센터</span>
+    <a class="issue-link" href="https://www.sisakorea.kr/38892" target="_blank">기사 원문 →</a>
+  </div>
+</div>
+</div>
+
+</div><!-- /issues-container -->
+
+<script>
+(function() {
+  const btns = document.querySelectorAll('.filter-btn');
+  const container = document.getElementById('issues-container');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      btns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const f = this.dataset.filter;
+
+      container.querySelectorAll('.section').forEach(sec => {
+        const secType = sec.dataset.type;
+        const issues = sec.querySelectorAll('.issue');
+
+        if (f === 'all') {
+          sec.hidden = false;
+          issues.forEach(i => i.hidden = false);
+          return;
+        }
+        if (f === 'dept' || f === 'org') {
+          sec.hidden = secType !== f;
+          if (!sec.hidden) issues.forEach(i => i.hidden = false);
+          return;
+        }
+        // level filter
+        let anyVisible = false;
+        issues.forEach(i => {
+          const match = i.dataset.level === f;
+          i.hidden = !match;
+          if (match) anyVisible = true;
+        });
+        sec.hidden = !anyVisible;
+      });
+    });
+  });
+})();
+</script>
