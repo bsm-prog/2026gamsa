@@ -33,6 +33,16 @@
         {"label": "콘텐츠산업과", "type": "dept"},
         {"label": "DMZ다큐멘터리영화제", "type": "agency"}
       ]
+    },
+    {
+      "date": "2026-09-16",
+      "file": "daily/2026-09-16.html",
+      "summary": "김동영 의원 직권남용 검찰 송치, 경기관광공사 3년 적자+2,007억 리츠, 도자재단 대표 낙하산·허위경력, 추경 536억 삭감",
+      "tags": [
+        {"label": "경기관광공사", "type": "agency"},
+        {"label": "한국도자재단", "type": "agency"},
+        {"label": "관광산업과", "type": "dept"}
+      ]
     }
   ]
 }
