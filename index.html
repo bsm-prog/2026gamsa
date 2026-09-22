@@ -2107,6 +2107,19 @@ a.ci-title:hover { color: var(--accent); }
     });
   });
 
+  // ── 페이지 로딩 시 배지 숫자 먼저 표시 ──
+  fetch('manifest.json?t=' + Date.now())
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => {
+      document.getElementById('monitor-count').textContent = (data.reports || []).length;
+    }).catch(() => {});
+
+  fetch('current-issues.json?t=' + Date.now())
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => {
+      document.getElementById('current-count').textContent = (data.issues || []).length;
+    }).catch(() => {});
+
   // Auto-load if hash is #monitor
   if (location.hash === '#monitor') {
     tabBtns.forEach(b => b.classList.remove('active'));
