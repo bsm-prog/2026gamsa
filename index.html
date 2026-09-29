@@ -621,6 +621,42 @@ h1, h2, h3 {
   padding-left: 2px;
 }
 
+/* ===== 행감질의서 Tab ===== */
+.qa-stats{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.qa-stat{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);padding:8px 14px;font-size:.82rem;font-weight:600;color:var(--text-secondary);box-shadow:var(--shadow-sm)}
+.qa-stat .qa-num{font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
+.qa-day-filters{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.qa-day-btn{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-family:inherit;font-size:.8rem;font-weight:500;color:var(--text-secondary);cursor:pointer;transition:all .15s}
+.qa-day-btn:hover{border-color:var(--accent);color:var(--accent)}
+.qa-day-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.qa-day-section{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border-light)}
+.qa-day-section:last-child{border-bottom:none}
+.qa-day-label{font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:4px}
+.qa-day-target{font-size:.75rem;color:var(--text-muted);margin-bottom:14px}
+.qa-institution{margin-bottom:20px}
+.qa-inst-header{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:2px solid var(--accent);margin-bottom:10px}
+.qa-inst-name{font-size:.95rem;font-weight:700;color:var(--text)}
+.qa-inst-count{font-size:.72rem;font-weight:600;color:var(--text-muted);background:var(--surface-alt);padding:2px 8px;border-radius:10px}
+.qa-inst-empty{padding:12px;color:var(--text-muted);font-size:.8rem;font-style:italic}
+.qa-item{display:flex;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);margin-bottom:8px;box-shadow:var(--shadow-sm);cursor:pointer;transition:all .15s}
+.qa-item:hover{box-shadow:var(--shadow-md);border-color:var(--accent)}
+.qa-type-tag{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:12px;white-space:nowrap;flex-shrink:0;align-self:flex-start;margin-top:2px}
+.qa-type-tag.type-core{background:#DC2626;color:#fff}
+.qa-type-tag.type-alt{background:var(--surface-alt);color:var(--text-secondary);border:1px solid var(--border)}
+.qa-content{flex:1;min-width:0}
+.qa-title{font-size:.88rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:4px}
+.qa-meta{font-size:.72rem;color:var(--text-muted)}
+.qa-viewer{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);overflow:hidden}
+.qa-viewer-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border-light);background:var(--surface-alt);flex-wrap:wrap;gap:8px}
+.qa-viewer-title{font-size:.9rem;font-weight:700;color:var(--text)}
+.qa-viewer-actions{display:flex;gap:12px;align-items:center}
+.qa-viewer-actions a,.qa-viewer-actions button{font-size:.8rem;color:var(--accent);text-decoration:none;cursor:pointer;background:none;border:none;font-family:inherit}
+.qa-viewer-actions a:hover,.qa-viewer-actions button:hover{text-decoration:underline}
+.qa-viewer-content{padding:20px;font-size:.88rem;line-height:1.7;color:var(--text);overflow-x:auto}
+.qa-viewer-content table{border-collapse:collapse;width:100%;margin:12px 0}
+.qa-viewer-content th,.qa-viewer-content td{border:1px solid var(--border);padding:8px 10px;text-align:left;font-size:.82rem}
+.qa-viewer-content th{background:var(--surface-alt);font-weight:600}
+
 /* ===== Current Issues Tab ===== */
 .ci-stats {
   display: flex;
@@ -793,10 +829,53 @@ a.ci-title:hover { color: var(--accent); }
 </header>
 
 <nav class="tab-nav">
+  <button class="tab-btn" data-tab="queries">행감질의서 <span class="tab-badge" id="queries-count">0</span></button>
   <button class="tab-btn active" data-tab="scan">이슈 스캔</button>
   <button class="tab-btn" data-tab="monitor">일일 모니터링 <span class="tab-badge" id="monitor-count">0</span></button>
   <button class="tab-btn" data-tab="current">현재이슈 <span class="tab-badge" id="current-count">0</span></button>
 </nav>
+
+<!-- ===== 행감질의서 탭 ===== -->
+<div class="tab-panel" id="panel-queries">
+  <div class="qa-stats">
+    <div class="qa-stat">전체 질의서 <strong class="qa-num" id="qa-total">0</strong></div>
+    <div class="qa-stat"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#DC2626;margin-right:2px"></span>핵심 <strong class="qa-num" id="qa-core-count">0</strong></div>
+    <div class="qa-stat"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--text-muted);margin-right:2px"></span>대체 <strong class="qa-num" id="qa-alt-count">0</strong></div>
+  </div>
+  <div class="qa-day-filters">
+    <button class="qa-day-btn active" data-day="all">전체</button>
+    <button class="qa-day-btn" data-day="exec1">집행부①</button>
+    <button class="qa-day-btn" data-day="exec2">집행부②</button>
+    <button class="qa-day-btn" data-day="org1">기관①</button>
+    <button class="qa-day-btn" data-day="org2">기관②</button>
+    <button class="qa-day-btn" data-day="org3">기관③</button>
+    <button class="qa-day-btn" data-day="org4">기관④</button>
+    <button class="qa-day-btn" data-day="org5">종합</button>
+  </div>
+  <div id="qa-list">
+    <div id="qa-content">
+      <div style="text-align:center;padding:48px 20px;color:var(--text-muted)">
+        <div style="font-size:2.5rem;margin-bottom:12px">📋</div>
+        <p><strong>질의서를 불러오는 중...</strong></p>
+      </div>
+    </div>
+  </div>
+  <div id="qa-viewer" style="display:none">
+    <div class="qa-viewer">
+      <div class="qa-viewer-bar">
+        <span class="qa-viewer-title" id="qa-viewer-title"></span>
+        <div class="qa-viewer-actions">
+          <a id="qa-open-link" href="#" target="_blank">새 창에서 보기 →</a>
+          <button onclick="closeQueryViewer()">← 목록으로</button>
+        </div>
+      </div>
+      <div class="qa-viewer-content" id="qa-viewer-content">
+        <div class="loading">불러오는 중...</div>
+      </div>
+    </div>
+  </div>
+  <div class="qa-updated" id="qa-updated"></div>
+</div>
 
 <!-- ===== Tab 1: 이슈 스캔 ===== -->
 <div class="tab-panel active" id="panel-scan">
@@ -1816,6 +1895,11 @@ a.ci-title:hover { color: var(--accent); }
         loadCurrentIssues();
         window._currentLoaded = true;
       }
+      // Load queries on first visit
+      if (this.dataset.tab === 'queries' && !window._queriesLoaded) {
+        loadQueries();
+        window._queriesLoaded = true;
+      }
     });
   });
 
@@ -2096,6 +2180,124 @@ a.ci-title:hover { color: var(--accent); }
     return div.innerHTML;
   }
 
+  // ── 행감질의서 tab logic ──
+  let _qaData = null;
+  let _qaFilter = 'all';
+
+  function loadQueries() {
+    fetch('queries-manifest.json?t=' + Date.now())
+      .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+      .then(data => {
+        _qaData = data;
+        var queries = data.queries || [];
+        document.getElementById('queries-count').textContent = queries.length;
+        document.getElementById('qa-total').textContent = queries.length;
+        var coreCount = queries.filter(function(q){ return q.type === '핵심'; }).length;
+        document.getElementById('qa-core-count').textContent = coreCount;
+        document.getElementById('qa-alt-count').textContent = queries.length - coreCount;
+        if (data.updated) {
+          var d = new Date(data.updated);
+          document.getElementById('qa-updated').textContent =
+            '마지막 업데이트: ' + d.getFullYear() + '-' +
+            String(d.getMonth()+1).padStart(2,'0') + '-' +
+            String(d.getDate()).padStart(2,'0') + ' ' +
+            String(d.getHours()).padStart(2,'0') + ':' +
+            String(d.getMinutes()).padStart(2,'0');
+        }
+        renderQueries();
+      })
+      .catch(function() {
+        document.getElementById('qa-content').innerHTML =
+          '<div style="text-align:center;padding:48px 20px;color:var(--text-muted)">' +
+          '<div style="font-size:2.5rem;margin-bottom:12px">📋</div>' +
+          '<p><strong>아직 등록된 질의서가 없습니다</strong></p>' +
+          '<p style="font-size:0.8rem;margin-top:8px">질의서원본 폴더에 .docx 파일을 넣으면<br>자동으로 변환되어 등록됩니다</p></div>';
+      });
+  }
+
+  function renderQueries() {
+    if (!_qaData) return;
+    var schedule = _qaData.schedule || [];
+    var queries = _qaData.queries || [];
+    if (queries.length === 0) {
+      document.getElementById('qa-content').innerHTML =
+        '<div style="text-align:center;padding:48px 20px;color:var(--text-muted)">' +
+        '<div style="font-size:2.5rem;margin-bottom:12px">📋</div>' +
+        '<p><strong>아직 등록된 질의서가 없습니다</strong></p>' +
+        '<p style="font-size:0.8rem;margin-top:8px">질의서원본 폴더에 .docx 파일을 넣으면<br>자동으로 변환되어 등록됩니다</p></div>';
+      return;
+    }
+    var filteredSchedule = _qaFilter === 'all' ? schedule : schedule.filter(function(s){ return s.id === _qaFilter; });
+    var html = '';
+    filteredSchedule.forEach(function(day) {
+      var dayQueries = queries.filter(function(q){ return q.day === day.id; });
+      html += '<div class="qa-day-section">';
+      html += '<div class="qa-day-label">' + day.label + '</div>';
+      html += '<div class="qa-day-target">' + day.target + ' — <em>' + day.focus + '</em></div>';
+      day.institutions.forEach(function(inst) {
+        var instQueries = dayQueries.filter(function(q){ return q.institution === inst; });
+        html += '<div class="qa-institution">';
+        html += '<div class="qa-inst-header">';
+        html += '<span class="qa-inst-name">' + inst + '</span>';
+        if (instQueries.length > 0) html += '<span class="qa-inst-count">' + instQueries.length + '건</span>';
+        html += '</div>';
+        if (instQueries.length === 0) {
+          html += '<div class="qa-inst-empty">등록된 질의서 없음</div>';
+        } else {
+          instQueries.forEach(function(q) {
+            var typeClass = q.type === '핵심' ? 'type-core' : 'type-alt';
+            var typeLabel = q.type || '대체';
+            html += '<div class="qa-item" onclick="openQuery(\'' + q.file.replace(/\'/g, "\\'") + '\', \'' + escapeHtml(q.title).replace(/\'/g, "\\'") + '\')">';
+            html += '  <span class="qa-type-tag ' + typeClass + '">' + typeLabel + '</span>';
+            html += '  <div class="qa-content">';
+            html += '    <div class="qa-title">' + escapeHtml(q.title) + '</div>';
+            html += '    <div class="qa-meta">' + inst + ' · ' + (q.uploaded || '') + '</div>';
+            html += '  </div></div>';
+          });
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+    document.getElementById('qa-content').innerHTML = html;
+  }
+
+  window.openQuery = function(file, title) {
+    document.getElementById('qa-list').style.display = 'none';
+    var viewer = document.getElementById('qa-viewer');
+    viewer.style.display = '';
+    document.getElementById('qa-viewer-title').textContent = title;
+    document.getElementById('qa-open-link').href = file;
+    var content = document.getElementById('qa-viewer-content');
+    content.innerHTML = '<div class="loading">불러오는 중...</div>';
+    fetch(file + '?t=' + Date.now())
+      .then(function(r) { if (!r.ok) throw new Error('not found'); return r.text(); })
+      .then(function(h) {
+        var bodyContent = h;
+        var bodyMatch = h.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+        if (bodyMatch) bodyContent = bodyMatch[1];
+        bodyContent = bodyContent.replace(/<script[\s\S]*?<\/script>/gi, '');
+        content.innerHTML = bodyContent;
+      })
+      .catch(function() {
+        content.innerHTML = '<div class="loading">파일을 불러올 수 없습니다.</div>';
+      });
+  };
+
+  window.closeQueryViewer = function() {
+    document.getElementById('qa-viewer').style.display = 'none';
+    document.getElementById('qa-list').style.display = '';
+  };
+
+  document.querySelectorAll('.qa-day-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.qa-day-btn').forEach(function(b){ b.classList.remove('active'); });
+      this.classList.add('active');
+      _qaFilter = this.dataset.day;
+      renderQueries();
+    });
+  });
+
   // CI filter buttons
   document.querySelectorAll('.ci-filter-btn').forEach(btn => {
     btn.addEventListener('click', function() {
@@ -2108,6 +2310,12 @@ a.ci-title:hover { color: var(--accent); }
   });
 
   // ── 페이지 로딩 시 배지 숫자 먼저 표시 ──
+  fetch('queries-manifest.json?t=' + Date.now())
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => {
+      document.getElementById('queries-count').textContent = (data.queries || []).length;
+    }).catch(() => {});
+
   fetch('manifest.json?t=' + Date.now())
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(data => {
@@ -2119,6 +2327,16 @@ a.ci-title:hover { color: var(--accent); }
     .then(data => {
       document.getElementById('current-count').textContent = (data.issues || []).length;
     }).catch(() => {});
+
+  // Auto-load if hash is #queries
+  if (location.hash === '#queries') {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    document.querySelector('[data-tab="queries"]').classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-queries').classList.add('active');
+    loadQueries();
+    window._queriesLoaded = true;
+  }
 
   // Auto-load if hash is #monitor
   if (location.hash === '#monitor') {
