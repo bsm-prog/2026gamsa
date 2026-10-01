@@ -629,6 +629,10 @@ h1, h2, h3 {
 .qa-day-btn{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-family:inherit;font-size:.8rem;font-weight:500;color:var(--text-secondary);cursor:pointer;transition:all .15s}
 .qa-day-btn:hover{border-color:var(--accent);color:var(--accent)}
 .qa-day-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.qa-day-btn .day-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;font-size:.68rem;font-weight:700;margin-left:4px;background:var(--surface-alt);color:var(--text-muted);font-variant-numeric:tabular-nums;line-height:1}
+.qa-day-btn.active .day-count{background:rgba(255,255,255,.25);color:#fff}
+.qa-day-btn .day-count.has-items{background:var(--accent-light);color:var(--accent)}
+.qa-day-btn.active .day-count.has-items{background:rgba(255,255,255,.25);color:#fff}
 .qa-day-section{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border-light)}
 .qa-day-section:last-child{border-bottom:none}
 .qa-day-label{font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:4px}
@@ -843,14 +847,14 @@ a.ci-title:hover { color: var(--accent); }
     <div class="qa-stat"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--text-muted);margin-right:2px"></span>대체 <strong class="qa-num" id="qa-alt-count">0</strong></div>
   </div>
   <div class="qa-day-filters">
-    <button class="qa-day-btn active" data-day="all">전체</button>
-    <button class="qa-day-btn" data-day="exec1">집행부①</button>
-    <button class="qa-day-btn" data-day="exec2">집행부②</button>
-    <button class="qa-day-btn" data-day="org1">기관①</button>
-    <button class="qa-day-btn" data-day="org2">기관②</button>
-    <button class="qa-day-btn" data-day="org3">기관③</button>
-    <button class="qa-day-btn" data-day="org4">기관④</button>
-    <button class="qa-day-btn" data-day="org5">종합</button>
+    <button class="qa-day-btn active" data-day="all">전체 <span class="day-count" id="dc-all">0</span></button>
+    <button class="qa-day-btn" data-day="exec1">집행부① <span class="day-count" id="dc-exec1">0</span></button>
+    <button class="qa-day-btn" data-day="exec2">집행부② <span class="day-count" id="dc-exec2">0</span></button>
+    <button class="qa-day-btn" data-day="org1">기관① <span class="day-count" id="dc-org1">0</span></button>
+    <button class="qa-day-btn" data-day="org2">기관② <span class="day-count" id="dc-org2">0</span></button>
+    <button class="qa-day-btn" data-day="org3">기관③ <span class="day-count" id="dc-org3">0</span></button>
+    <button class="qa-day-btn" data-day="org4">기관④ <span class="day-count" id="dc-org4">0</span></button>
+    <button class="qa-day-btn" data-day="org5">종합 <span class="day-count" id="dc-org5">0</span></button>
   </div>
   <div id="qa-list">
     <div id="qa-content">
@@ -2195,6 +2199,19 @@ a.ci-title:hover { color: var(--accent); }
         var coreCount = queries.filter(function(q){ return q.type === '핵심'; }).length;
         document.getElementById('qa-core-count').textContent = coreCount;
         document.getElementById('qa-alt-count').textContent = queries.length - coreCount;
+        // Update per-day counts on filter buttons
+        var dayIds = ['exec1','exec2','org1','org2','org3','org4','org5'];
+        document.getElementById('dc-all').textContent = queries.length;
+        if (queries.length > 0) document.getElementById('dc-all').classList.add('has-items');
+        dayIds.forEach(function(did) {
+          var cnt = queries.filter(function(q){ return q.day === did; }).length;
+          var el = document.getElementById('dc-' + did);
+          if (el) {
+            el.textContent = cnt;
+            if (cnt > 0) el.classList.add('has-items');
+            else el.classList.remove('has-items');
+          }
+        });
         if (data.updated) {
           var d = new Date(data.updated);
           document.getElementById('qa-updated').textContent =
