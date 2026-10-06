@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T05:36:36.926197+00:00",
+  "updated": "2026-10-06T00:51:11.899494+00:00",
   "schedule": [
     {
       "id": "exec1",
@@ -181,6 +181,28 @@
       "original": "월드컵관리재단_관리본부장이탈및 퇴직자현황.docx",
       "convertedAt": "2026-10-02T05:36:36.926089+00:00",
       "day": "org2"
+    },
+    {
+      "id": "q007",
+      "institution": "경기콘텐츠진흥원",
+      "title": "콘텐츠진흥원 - 인디뮤직페스티벌",
+      "subject": "인디뮤직페스티벌",
+      "type": "핵심",
+      "file": "queries/org4_콘텐츠진흥원_인디뮤직페스티벌.html",
+      "original": "콘진원_인디뮤직페스티벌.docx",
+      "convertedAt": "2026-10-06T00:51:11.899494+00:00",
+      "day": "org4"
+    },
+    {
+      "id": "q008",
+      "institution": "경기콘텐츠진흥원",
+      "title": "콘텐츠진흥원 - AI콘텐츠캠퍼스",
+      "subject": "ai콘텐츠캠퍼스",
+      "type": "대체",
+      "file": "queries/org4_콘텐츠진흥원_ai콘텐츠캠퍼스.html",
+      "original": "콘진원_ai콘텐츠캠퍼스.docx",
+      "convertedAt": "2026-10-06T00:51:11.899494+00:00",
+      "day": "org4"
     }
   ]
 }
