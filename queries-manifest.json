@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07T05:15:13.455315+00:00",
+  "updated": "2026-10-07T08:13:08.952407+00:00",
   "schedule": [
     {
       "id": "exec1",
@@ -203,6 +203,28 @@
       "original": "콘진원_ai콘텐츠캠퍼스.docx",
       "convertedAt": "2026-10-06T00:51:11.899494+00:00",
       "day": "org4"
+    },
+    {
+      "id": "q009",
+      "institution": "경기도장애인체육회",
+      "title": "장애인체육회 - 임원당사자성",
+      "subject": "임원당사자성",
+      "type": "대체",
+      "file": "queries/org2_장애인체육회_임원당사자성.html",
+      "original": "장애인체육화_임원당사자성.docx",
+      "convertedAt": "2026-10-07T08:13:08.952407+00:00",
+      "day": "org2"
+    },
+    {
+      "id": "q010",
+      "institution": "전국체전추진단",
+      "title": "전국체전추진단 - 시설개보수",
+      "subject": "시설개보수",
+      "type": "핵심",
+      "file": "queries/exec2_전국체전추진단_시설개보수.html",
+      "original": "전국체전추진단_시설개보수.docx",
+      "convertedAt": "2026-10-07T08:13:08.952407+00:00",
+      "day": "exec2"
     }
   ]
 }
