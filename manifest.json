@@ -1,7 +1,17 @@
 {
   "project": "2026 문화체육관광위원회 행정사무감사",
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "reports": [
+    {
+      "date": "2026-10-28",
+      "file": "daily/2026-10-28.html",
+      "summary": "GHOST 페스티벌 1만5000명 방문 성료(DMZ·한류 OST 결합 신규 브랜드 축제) — 도자비엔날레 폐막 D-4 관람객 실적 여전히 미공개·43억 성과 검증 시점 도래, DMZ OPEN 국제음악제 성료·에코피스포럼 금일 개최",
+      "tags": [
+        {"label": "관광산업과", "type": "dept"},
+        {"label": "경기관광공사", "type": "agency"},
+        {"label": "한국도자재단", "type": "agency"}
+      ]
+    },
     {
       "date": "2026-10-27",
       "file": "daily/2026-10-27.html",
