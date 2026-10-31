@@ -647,6 +647,8 @@ h1, h2, h3 {
 .qa-type-tag{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:12px;white-space:nowrap;flex-shrink:0;align-self:flex-start;margin-top:2px}
 .qa-type-tag.type-core{background:#DC2626;color:#fff}
 .qa-type-tag.type-alt{background:var(--surface-alt);color:var(--text-secondary);border:1px solid var(--border)}
+.qa-type-tag.type-final{background:#16A34A;color:#fff}
+.qa-item.item-final{border-left:4px solid #16A34A}
 .qa-content{flex:1;min-width:0}
 .qa-title{font-size:.88rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:4px}
 .qa-meta{font-size:.72rem;color:var(--text-muted)}
@@ -845,6 +847,7 @@ a.ci-title:hover { color: var(--accent); }
     <div class="qa-stat">전체 질의서 <strong class="qa-num" id="qa-total">0</strong></div>
     <div class="qa-stat"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#DC2626;margin-right:2px"></span>핵심 <strong class="qa-num" id="qa-core-count">0</strong></div>
     <div class="qa-stat"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--text-muted);margin-right:2px"></span>대체 <strong class="qa-num" id="qa-alt-count">0</strong></div>
+    <div class="qa-stat"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#16A34A;margin-right:2px"></span>최종발언 <strong class="qa-num" id="qa-final-count">0</strong></div>
   </div>
   <div class="qa-day-filters">
     <button class="qa-day-btn active" data-day="all">전체 <span class="day-count" id="dc-all">0</span></button>
@@ -2198,7 +2201,9 @@ a.ci-title:hover { color: var(--accent); }
         document.getElementById('qa-total').textContent = queries.length;
         var coreCount = queries.filter(function(q){ return q.type === '핵심'; }).length;
         document.getElementById('qa-core-count').textContent = coreCount;
-        document.getElementById('qa-alt-count').textContent = queries.length - coreCount;
+        var finalCount = queries.filter(function(q){ return q.type === '최종발언'; }).length;
+        document.getElementById('qa-alt-count').textContent = queries.length - coreCount - finalCount;
+        document.getElementById('qa-final-count').textContent = finalCount;
         // Update per-day counts on filter buttons
         var dayIds = ['exec1','exec2','org1','org2','org3','org4','org5'];
         document.getElementById('dc-all').textContent = queries.length;
@@ -2262,9 +2267,9 @@ a.ci-title:hover { color: var(--accent); }
           html += '<div class="qa-inst-empty">등록된 질의서 없음</div>';
         } else {
           instQueries.forEach(function(q) {
-            var typeClass = q.type === '핵심' ? 'type-core' : 'type-alt';
+            var typeClass = q.type === '핵심' ? 'type-core' : (q.type === '최종발언' ? 'type-final' : 'type-alt');
             var typeLabel = q.type || '대체';
-            html += '<div class="qa-item" onclick="openQuery(\'' + q.file.replace(/\'/g, "\\'") + '\', \'' + escapeHtml(q.title).replace(/\'/g, "\\'") + '\')">';
+            html += '<div class="qa-item' + (q.type === '최종발언' ? ' item-final' : '') + '" onclick="openQuery(\'' + q.file.replace(/\'/g, "\\'") + '\', \'' + escapeHtml(q.title).replace(/\'/g, "\\'") + '\')">';
             html += '  <span class="qa-type-tag ' + typeClass + '">' + typeLabel + '</span>';
             html += '  <div class="qa-content">';
             html += '    <div class="qa-title">' + escapeHtml(q.title) + '</div>';
