@@ -2274,7 +2274,7 @@ a.ci-title:hover { color: var(--accent); }
           instQueries.forEach(function(q) {
             var typeClass = q.type === '핵심' ? 'type-core' : (q.type === '최종발언' ? 'type-final' : (q.type === '최종발언 v2' ? 'type-final2' : 'type-alt'));
             var typeLabel = q.type || '대체';
-            html += '<div class="qa-item' + (q.type === '최종발언' ? ' item-final' : (q.type === '최종발언 v2' ? ' item-final2' : '')) + '" onclick="openQuery(\'' + q.file.replace(/\'/g, "\\'") + '\', \'' + escapeHtml(q.title).replace(/\'/g, "\\'") + '\')">';
+            html += '<div class="qa-item' + (q.type === '최종발언' ? ' item-final' : (q.type === '최종발언 v2' ? ' item-final2' : '')) + '" onclick="openQuery(\'' + q.file.replace(/\'/g, "\\'") + '\', \'' + escapeHtml(q.title).replace(/\'/g, "\\'").replace(/"/g, '&quot;') + '\')">';
             html += '  <span class="qa-type-tag ' + typeClass + '">' + typeLabel + '</span>';
             html += '  <div class="qa-content">';
             html += '    <div class="qa-title">' + escapeHtml(q.title) + '</div>';
